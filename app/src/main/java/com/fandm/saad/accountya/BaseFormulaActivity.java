@@ -37,12 +37,13 @@ public class BaseFormulaActivity extends AppCompatActivity {
         formula9 = findViewById(R.id.formula_button_9);
 
         String relevant_list = getIntent().getStringExtra("formula_list");
-        if(relevant_list.equals("cost_accounting")){
+
+        if(!relevant_list.isEmpty() & relevant_list.equals("cost_accounting")){
             display_formula_list(cost_accounting_formula_list);
             actionBar.setTitle("Cost Accounting");
             formula_type = "cost_accounting";
         }
-        else if(relevant_list.equals("financial_accounting")){
+        else if(!relevant_list.isEmpty() & relevant_list.equals("financial_accounting")){
             display_formula_list(financial_accounting_formula_list);
             actionBar.setTitle("Financial Accounting");
             formula_type = "financial_accounting";

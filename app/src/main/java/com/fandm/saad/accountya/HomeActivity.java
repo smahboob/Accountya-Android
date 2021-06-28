@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import java.util.Objects;
+
 public class HomeActivity extends AppCompatActivity {
 
     Button cost_accounting_button;
@@ -22,6 +24,7 @@ public class HomeActivity extends AppCompatActivity {
 
         cost_accounting_button.setOnClickListener(v -> show_cost_accounting_formula_list());
         financial_accounting_button.setOnClickListener(v -> show_financial_accounting_formula_list());
+
     }
 
     public void show_cost_accounting_formula_list() {

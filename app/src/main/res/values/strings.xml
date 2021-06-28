@@ -3,4 +3,7 @@
     <string name="cost_accounting_text">Cost Accounting</string>
     <string name="financial_accounting_text">Financial Accounting</string>
     <string name="main_home_logo_contentDescription_text">main_home_logo</string>
+    <string name="enter_the_value_here">Enter the value here</string>
+    <string name="label_1">Label 1</string>
+    <string name="calculate_text">Calculate</string>
 </resources>

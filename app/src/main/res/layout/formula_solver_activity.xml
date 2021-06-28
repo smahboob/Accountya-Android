@@ -1,9 +1,153 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:orientation="vertical"
+    android:padding="10dp"
     tools:context=".FormulaSolverActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:id="@+id/label_one_linear_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical|center_horizontal"
+        android:background="@drawable/rounded_corner"
+        android:padding="5dp"
+        android:layout_marginBottom="20dp">
+
+        <TextView
+            android:id="@+id/label_one_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="right"
+            android:padding="10dp"
+            android:text="@string/label_1"
+            android:textAlignment="viewStart"
+            android:textStyle="bold"
+            tools:ignore="RtlCompat,RtlHardcoded">
+
+        </TextView>
+
+        <EditText
+            android:id="@+id/label_one_et"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#FFFFFF"
+            android:fontFamily="sans-serif-light"
+            android:gravity="right"
+            android:padding="10dp"
+            android:hint="@string/enter_the_value_here"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="normal"
+            tools:ignore="LabelFor,RtlHardcoded"
+            android:autofillHints="value"
+            android:inputType="numberDecimal" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/label_two_linear_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical|center_horizontal"
+        android:background="@drawable/rounded_corner"
+        android:padding="5dp"
+        android:layout_marginBottom="20dp">
+
+
+        <TextView
+            android:id="@+id/label_two_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="right"
+            android:padding="10dp"
+            android:text="@string/label_1"
+            android:textAlignment="viewStart"
+            android:textStyle="bold"
+            tools:ignore="RtlCompat,RtlHardcoded">
+
+        </TextView>
+
+        <EditText
+            android:id="@+id/label_two_et"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#FFFFFF"
+            android:fontFamily="sans-serif-light"
+            android:gravity="right"
+            android:padding="10dp"
+            android:hint="@string/enter_the_value_here"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="normal"
+            tools:ignore="LabelFor,RtlHardcoded"
+            android:autofillHints="value"
+            android:inputType="numberDecimal" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/label_three_linear_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical|center_horizontal"
+        android:background="@drawable/rounded_corner"
+        android:padding="5dp"
+        android:layout_marginBottom="20dp">
+
+        <TextView
+            android:id="@+id/label_three_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="right"
+            android:padding="10dp"
+            android:text="@string/label_1"
+            android:textAlignment="viewStart"
+            android:textStyle="bold"
+            tools:ignore="RtlCompat,RtlHardcoded">
+
+        </TextView>
+
+        <EditText
+            android:id="@+id/label_three_et"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#FFFFFF"
+            android:fontFamily="sans-serif-light"
+            android:gravity="right"
+            android:padding="10dp"
+            android:hint="@string/enter_the_value_here"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="normal"
+            tools:ignore="LabelFor,RtlHardcoded"
+            android:autofillHints="value"
+            android:inputType="numberDecimal" />
+
+    </LinearLayout>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/calculate_text"/>
+
+
+</LinearLayout>
