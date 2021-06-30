@@ -1,14 +1,20 @@
 package com.fandm.saad.accountya;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NavUtils;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -42,26 +48,41 @@ public class FormulaSolverActivity extends AppCompatActivity {
                     Map.entry("Acid Test Ratio",3)
             ));
 
-    private List<List<String>> cost_accounting_formula_label_list = new ArrayList<List<String>>() {{ add(Arrays.asList("Fixed Cost", "Sales Price Per Unit", "Variable Cost Per Unit"));
-                                                                                                     add(Arrays.asList("Total Revenue", "Total Expenses"));
+    private final List<List<String>> cost_accounting_formula_label_list = new ArrayList<List<String>>() {{ add(Arrays.asList("Fixed Cost", "Sales Price Per Unit", "Variable Cost Per Unit"));
+        add(Arrays.asList("Total Revenue", "Total Expenses"));add(Arrays.asList("Total Revenue", "Variable Cost", "Fixed Cost"));add(Arrays.asList("Total Revenue", "Variable Cost", "Units Sold"));
+        add(Arrays.asList("Total Revenue", "Total Expenses"));add(Arrays.asList("Actual cost incurred", "Standard cost", "Actual quantity of units"));
+        add(Arrays.asList("Actual unit usage", "Standard unit usage","Standard cost per unit"));add(Arrays.asList("Spending Variance", "Efficiency Variance"));
+        add(Arrays.asList("Beginning Inventory", "Purchases", "Cost of Sales"));
     }};
 
-    private List<List<String>> financial_accounting_formula_label_list = new ArrayList<List<String>>() {{ add(Arrays.asList("Fixed Cost", "Sales Price Per Unit", "Variable Cost Per Unit"));
-        add(Arrays.asList("Total Revenue", "Total Expenses"));
+    private final List<List<String>> financial_accounting_formula_label_list = new ArrayList<List<String>>() {{ add(Arrays.asList("Total Revenue", "Total Expenses"));
+        add(Arrays.asList("Net Income", "Average Total Assets "));add(Arrays.asList("Net Income", "Average Shareholder's Equity"));add(Arrays.asList("Short Term Debt", "Long Term Debt", "Total Assets"));
+        add(Arrays.asList("Initial Cost of Assets", "Salvage Value of Asset:", "Useful Life of Asset"));add(Arrays.asList("Initial Cost of Assets", "Salvage Value of Asset", "Useful Life of Asset"));
+        add(Arrays.asList("Net Sales", "Average Total Assets"));add(Arrays.asList("Net Operating Income", "Total Debt Services"));
+        add(Arrays.asList("Current Assets", "Current Liabilities", "Ending Inventory"));
     }};
 
-    private boolean cost_accounting_selected = true;
     private int formula_tag_int;
 
+    private String [] current_label_list;
+
+    private EditText label_one_et, label_two_et, label_three_et;
+
+    private String formula_name_global;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d("Tag: ", "Came to teh on create of formula");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.formula_solver_activity);
 
         ActionBar actionBar = getSupportActionBar();
         assert actionBar != null;
         actionBar.setDisplayHomeAsUpEnabled(true);
+
+        label_one_et = findViewById(R.id.label_one_et);
+        label_two_et = findViewById(R.id.label_two_et);
+        label_three_et = findViewById(R.id.label_three_et);
 
         String formula_type = getIntent().getStringExtra("formula_type");
         String formula_tag = getIntent().getStringExtra("formula_tag");
@@ -71,25 +92,50 @@ public class FormulaSolverActivity extends AppCompatActivity {
 
         int total_required_labels = 0;
 
+        //extract the formula type passed from last activity, and determine which and how many label to display.
         if(formula_type.equals("cost_accounting")){
             String formula_name = cost_accounting_formula_list[formula_tag_int];
+            formula_name_global = formula_name;
             actionBar.setTitle(formula_name);
             total_required_labels = cost_accounting_formula_map.getOrDefault(formula_name, 0);
-            cost_accounting_selected = true;
             configureLabels(total_required_labels, cost_accounting_formula_label_list);
         }
         else {
             String formula_name = financial_accounting_formula_list[formula_tag_int];
+            formula_name_global = formula_name;
             actionBar.setTitle(formula_name);
             total_required_labels = financial_accounting_formula_map.getOrDefault(formula_name,0);
-            cost_accounting_selected = false;
             configureLabels(total_required_labels, financial_accounting_formula_label_list);
         }
 
+        //if the formula only needs two labels, just display two and hide the third one.
         if(total_required_labels == 2){
             layout3.setVisibility(View.INVISIBLE);
         }
 
+        current_label_list = new String[total_required_labels];
+
+        Button calculate = findViewById(R.id.calculate_button);
+        int finalTotal_required_labels = total_required_labels;
+        calculate.setOnClickListener(v -> show_solution(finalTotal_required_labels));
+    }
+
+    //this method is an onclick listener to take the user to final page, where answer is calculated and displayed.
+    private void show_solution(int total_required_labels) {
+        String[] current_label_values = new String[total_required_labels];
+        current_label_values[0] = (label_one_et.getText().toString());
+        current_label_values[1] = (label_two_et.getText().toString());
+        if(total_required_labels == 3){
+            current_label_values[2] = (label_three_et.getText().toString());
+        }
+
+        Intent show_solution_intent = new Intent(FormulaSolverActivity.this, ShowSolutionActivity.class);
+        show_solution_intent.putExtra("formula_labels", current_label_list);
+        show_solution_intent.putExtra("formula_labels_values", current_label_values);
+        show_solution_intent.putExtra("formula_type", getIntent().getStringExtra("formula_type"));
+        show_solution_intent.putExtra("formula_name", formula_name_global);
+        show_solution_intent.putExtra("formula_tag", getIntent().getStringExtra("formula_tag"));
+        startActivity(show_solution_intent);
     }
 
     private void configureLabels(int total_labels, List<List<String>> label_list){
@@ -99,9 +145,26 @@ public class FormulaSolverActivity extends AppCompatActivity {
 
         one_tv.setText(label_list.get(formula_tag_int).get(0));
         two_tv.setText(label_list.get(formula_tag_int).get(1));
+        current_label_list[0] = (label_list.get(formula_tag_int).get(0));
+        current_label_list[1] = (label_list.get(formula_tag_int).get(1));
         if(total_labels == 3){
             three_tv.setText(label_list.get(formula_tag_int).get(2));
+            current_label_list[2] = (label_list.get(formula_tag_int).get(2));
         }
 
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        Log.d("Tag: ", "came here to on options in formula solver");
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                Intent newIntent = new Intent(FormulaSolverActivity.this, BaseFormulaActivity.class);
+                newIntent.putExtra("formula_list", getIntent().getStringExtra("formula_type"));
+                startActivity(newIntent);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
