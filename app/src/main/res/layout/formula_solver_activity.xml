@@ -6,7 +6,8 @@
     android:layout_gravity="center"
     android:orientation="vertical"
     android:padding="10dp"
-    tools:context=".FormulaSolverActivity">
+    tools:context=".FormulaSolverActivity"
+    android:id="@+id/formula_solver_layout">
 
 
     <LinearLayout

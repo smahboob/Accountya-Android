@@ -24,15 +24,14 @@ public class ShowSolutionActivity extends AppCompatActivity {
 
         ActionBar actionBar = getSupportActionBar();
         assert actionBar != null;
-        actionBar.setTitle("Answer");
         actionBar.setDisplayHomeAsUpEnabled(true);
 
         current_labels = getIntent().getStringArrayExtra("formula_labels");
         current_labels_values = getIntent().getStringArrayExtra("formula_labels_values");
-
+        String current_formula_name = getIntent().getStringExtra("formula_name");
+        actionBar.setTitle(current_formula_name);
         initialize_components();
-
-
+        calculate_solution(current_labels_values, current_formula_name);
     }
 
     private void initialize_components(){
@@ -60,13 +59,30 @@ public class ShowSolutionActivity extends AppCompatActivity {
         label2.setText(current_labels[1]);
         label_val2.setText(current_labels_values[1]);
 
-        if(current_labels.length == 2){
+        if(current_labels_values.length == 2){
             linearLayout3.setVisibility(View.INVISIBLE);
         }
         else{
-            label2.setText(current_labels[2]);
-            label_val2.setText(current_labels_values[2]);
+            label3.setText(current_labels[2]);
+            label_val3.setText(current_labels_values[2]);
         }
+    }
+
+    private void calculate_solution(String[]current_labels_values, String formula_name){
+        double val1 = Double.parseDouble(current_labels_values[0]);
+        double val2 = Double.parseDouble(current_labels_values[1]);
+        double val3 = 0;
+        if(current_labels_values.length == 3){
+            val3 = Double.parseDouble(current_labels_values[2]);
+        }
+
+        if(formula_name.equals("Breakeven")){
+            String formula = "Formula: [(Fixed Cost / Selling Price) - Variable Cost]";
+            formula_text.setText(formula);
+            double answer = (val1/val2) - val3;
+            Log.d("Answer: ", String.valueOf(answer));
+        }
+
     }
 
     @Override

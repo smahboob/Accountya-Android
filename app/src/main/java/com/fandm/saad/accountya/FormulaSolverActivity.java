@@ -18,6 +18,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -64,7 +67,7 @@ public class FormulaSolverActivity extends AppCompatActivity {
 
     private int formula_tag_int;
 
-    private String [] current_label_list;
+    private final String [] current_label_list = new String[3];
 
     private EditText label_one_et, label_two_et, label_three_et;
 
@@ -78,6 +81,7 @@ public class FormulaSolverActivity extends AppCompatActivity {
 
         ActionBar actionBar = getSupportActionBar();
         assert actionBar != null;
+        actionBar.setTitle("Enter values");
         actionBar.setDisplayHomeAsUpEnabled(true);
 
         label_one_et = findViewById(R.id.label_one_et);
@@ -88,7 +92,6 @@ public class FormulaSolverActivity extends AppCompatActivity {
         String formula_tag = getIntent().getStringExtra("formula_tag");
         formula_tag_int = Integer.parseInt(formula_tag);
 
-        LinearLayout layout3 = findViewById(R.id.label_three_linear_layout);
 
         int total_required_labels = 0;
 
@@ -96,37 +99,52 @@ public class FormulaSolverActivity extends AppCompatActivity {
         if(formula_type.equals("cost_accounting")){
             String formula_name = cost_accounting_formula_list[formula_tag_int];
             formula_name_global = formula_name;
-            actionBar.setTitle(formula_name);
+            //actionBar.setTitle(formula_name);
             total_required_labels = cost_accounting_formula_map.getOrDefault(formula_name, 0);
             configureLabels(total_required_labels, cost_accounting_formula_label_list);
         }
         else {
             String formula_name = financial_accounting_formula_list[formula_tag_int];
             formula_name_global = formula_name;
-            actionBar.setTitle(formula_name);
+            //actionBar.setTitle(formula_name);
             total_required_labels = financial_accounting_formula_map.getOrDefault(formula_name,0);
             configureLabels(total_required_labels, financial_accounting_formula_label_list);
         }
+
+        Button calculate = findViewById(R.id.calculate_button);
+        LinearLayout layout3 = findViewById(R.id.label_three_linear_layout);
 
         //if the formula only needs two labels, just display two and hide the third one.
         if(total_required_labels == 2){
             layout3.setVisibility(View.INVISIBLE);
         }
 
-        current_label_list = new String[total_required_labels];
-
-        Button calculate = findViewById(R.id.calculate_button);
         int finalTotal_required_labels = total_required_labels;
         calculate.setOnClickListener(v -> show_solution(finalTotal_required_labels));
     }
 
     //this method is an onclick listener to take the user to final page, where answer is calculated and displayed.
     private void show_solution(int total_required_labels) {
+        String label_val_1 = label_one_et.getText().toString();
+        String label_val_2 = label_two_et.getText().toString();
+
+        if(label_val_1.isEmpty() || label_val_2.isEmpty()){
+            Snackbar.make(findViewById(R.id.formula_solver_layout), "Missing information required to calculate.", Snackbar.LENGTH_LONG);
+            Toast.makeText(this, "Missing information to calculate.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         String[] current_label_values = new String[total_required_labels];
-        current_label_values[0] = (label_one_et.getText().toString());
-        current_label_values[1] = (label_two_et.getText().toString());
+        current_label_values[0] = label_val_1;
+        current_label_values[1] = label_val_2;
         if(total_required_labels == 3){
-            current_label_values[2] = (label_three_et.getText().toString());
+            String label_val_3 = label_three_et.getText().toString();
+            current_label_values[2] = label_val_3;
+            if(label_val_3.isEmpty()){
+                Snackbar.make(findViewById(R.id.formula_solver_layout), "Missing information required to calculate.", Snackbar.LENGTH_LONG);
+                Toast.makeText(this, "Missing information to calculate.", Toast.LENGTH_SHORT).show();
+                return;
+            }
         }
 
         Intent show_solution_intent = new Intent(FormulaSolverActivity.this, ShowSolutionActivity.class);
@@ -158,12 +176,11 @@ public class FormulaSolverActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         Log.d("Tag: ", "came here to on options in formula solver");
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                Intent newIntent = new Intent(FormulaSolverActivity.this, BaseFormulaActivity.class);
-                newIntent.putExtra("formula_list", getIntent().getStringExtra("formula_type"));
-                startActivity(newIntent);
-                return true;
+        if (item.getItemId() == android.R.id.home) {
+            Intent newIntent = new Intent(FormulaSolverActivity.this, BaseFormulaActivity.class);
+            newIntent.putExtra("formula_list", getIntent().getStringExtra("formula_type"));
+            startActivity(newIntent);
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }
