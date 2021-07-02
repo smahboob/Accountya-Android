@@ -10,11 +10,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import java.lang.Math;
+
 
 public class ShowSolutionActivity extends AppCompatActivity {
 
     private LinearLayout linearLayout1, linearLayout2, linearLayout3;
-    private TextView label1, label2, label3, label_val1, label_val2, label_val3, formula_text;
+    private TextView label1, label2, label3, label_val1, label_val2, label_val3, formula_text, answer_text, explanation_text;
     private String [] current_labels, current_labels_values;
 
     @Override
@@ -48,6 +50,8 @@ public class ShowSolutionActivity extends AppCompatActivity {
         label_val3 = findViewById(R.id.label_three_et_ss);
 
         formula_text = findViewById(R.id.formula_tv_ss);
+        answer_text = findViewById(R.id.answer_tv_ss);
+        explanation_text = findViewById(R.id.explanation_tv_ss);
 
         configure_labels();
     }
@@ -72,19 +76,79 @@ public class ShowSolutionActivity extends AppCompatActivity {
         double val1 = Double.parseDouble(current_labels_values[0]);
         double val2 = Double.parseDouble(current_labels_values[1]);
         double val3 = 0;
+        double answer = 0;
+        String formula_explanation = "";
+        String formula = "";
+
+        //hide the third value label, if the total labels passed in were 2, and only parse the value in case if the number of labels is 3
         if(current_labels_values.length == 3){
             val3 = Double.parseDouble(current_labels_values[2]);
         }
 
-        if(formula_name.equals("Breakeven")){
-            String formula = "Formula: [(Fixed Cost / Selling Price) - Variable Cost]";
-            formula_text.setText(formula);
-            double answer = (val1/val2) - val3;
-            Log.d("Answer: ", String.valueOf(answer));
+        switch (formula_name) {
+            case "Breakeven": {
+                formula = "Formula: [(Fixed Cost / Sales Price Per Unit) - Variable Cost Per Unit]";
+                answer = (val1 / val2) - val3;
+                formula_explanation = "The break-even point (BEP) is the point at which total cost and total revenue are equal, i.e. 'even'. There is no net loss or gain, and one has 'broken even', though opportunity costs have been paid and capital has received the risk-adjusted, expected return. In short, all costs that must be paid are paid, and there is neither profit nor loss.";
+                break;
+            }
+            case "Gross Margin": {
+                formula = "Formula: [(Total Revenue - Cost of goods sold) / Total Revenue]";
+                answer = (val1 - val2) / val1;
+                formula_explanation = "Gross margin is the sales revenue a company retains after incurring the direct costs associated with producing the goods it sells, and the services it provides. The higher the gross margin, the more capital a company retains on each dollar of sales, which it can then use to pay other costs or satisfy debt obligations. ";
+                break;
+            }
+            case "Target Net Income": {
+                formula = "Formula: [(Total Revenue - Variable Cost) - Fixed Cost]";
+                answer = (val1 - val2) - val3;
+                formula_explanation = "Target income is the profit that the managers of a company expect to attain for a designated accounting period. It is a key concept in a corporate control system that drives corrective management actions.";
+                break;
+            }
+            case "Contribution Margin": {
+                formula = "Formula: [(Total Revenue - Variable Cost) / Units Sold]";
+                answer = (val1 - val2) / val3;
+                formula_explanation = "Contribution margin per unit is the dollar amount of a product’s selling price exceeds its variable costs. In other words, it’s the amount of revenues from the sale of one unit that is left over after the variable costs for that unit have been paid. You can think it as the amount of money that each unit brings in to pay for fixed costs.";
+                break;
+            }
+            case "Profit Margin": {
+                formula = "Formula: [(Total Revenue - Total Expenses) / Total Revenue]";
+                answer = (val1 - val2) / val1;
+                formula_explanation = "Profit margin is one of the commonly used profitability ratios to gauge the degree to which a company or a business activity makes money. It represents what percentage of sales has turned into profits. Simply put, the percentage figure indicates how many cents of profit the business has generated for each dollar of sale.";
+                break;
+            }
+            case "Price Variance": {
+                formula = "Formula: [(Actual Cost incurred - Standard Cost) * Actual Quantity]";
+                answer = (val1 - val2) * val3;
+                formula_explanation =  "If the actual cost incurred is lower than the standard cost, this is considered a favorable price variance. If the actual cost incurred is higher than the standard cost, this is considered an unfavorable price variance.The price variance concept can be applied to any type of cost.";
+                break;
+            }
+            case "Efficiency Variance": {
+                formula = "Formula: [(Actual Cost incurred - Standard Cost) * Standard Cost]";
+                answer = (val1 - val2) / val3;
+                formula_explanation = "Efficiency variance is the difference between the theoretical amount of inputs required to produce a unit of output and the actual number of inputs used to produce the unit of output. In manufacturing, efficiency variance can be used to analyze the effectiveness of an operation.";
+                break;
+            }
+            case "Variable Overhead Variance": {
+                formula = "Formula: [Spending Variance - Efficiency Variance]";
+                answer = (val1 - val2);
+                formula_explanation = "Variable overhead efficiency variance refers to the difference between the true time it takes to manufacture a product and the time budgeted for it, as well as the impact of that difference. It arises from variance in productive efficiency. Irrespective of the production, the standard variable overhead rate remains the same.";
+                break;
+            }
+            case "Ending Inventory": {
+                formula = "Formula: [(Beginning Inventory + Purchases) - Cost of goods sold]";
+                answer = (val1 + val2) - val3;
+                formula_explanation = "Ending Inventory formula calculates the value of goods available for sale at the end of the accounting period. Usually, it is recorded on the balance sheet at the lower of cost or its market value.";
+                break;
+            }
         }
 
+        String answer_str = "Answer: " + answer;
+        formula_text.setText(formula);
+        answer_text.setText(answer_str);
+        explanation_text.setText(formula_explanation);
     }
 
+    //we override this method to send data back to the previous activity.
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         Log.d("Tag: ", "came here to on options in show solutions");

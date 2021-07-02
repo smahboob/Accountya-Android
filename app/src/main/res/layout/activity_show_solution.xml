@@ -8,7 +8,6 @@
     android:padding="10dp"
     tools:context=".ShowSolutionActivity">
 
-
     <LinearLayout
         android:id="@+id/label_one_linear_layout_ss"
         android:layout_width="match_parent"
@@ -16,8 +15,8 @@
         android:orientation="horizontal"
         android:gravity="center_vertical|center_horizontal"
         android:background="@drawable/rounded_corner"
-        android:padding="5dp"
-        android:layout_marginBottom="20dp">
+        android:padding="2dp"
+        android:layout_marginBottom="10dp">
 
         <TextView
             android:id="@+id/label_one_tv_ss"
@@ -30,9 +29,7 @@
             android:text="@string/label_1"
             android:textAlignment="viewStart"
             android:textStyle="bold"
-            tools:ignore="RtlCompat,RtlHardcoded">
-
-        </TextView>
+            tools:ignore="RtlCompat,RtlHardcoded"/>
 
         <EditText
             android:id="@+id/label_one_et_ss"
@@ -45,7 +42,7 @@
             android:padding="10dp"
             android:hint="@string/enter_the_value_here"
             android:textColor="@color/black"
-            android:textSize="16sp"
+            android:textSize="14sp"
             android:textStyle="normal"
             tools:ignore="LabelFor,RtlHardcoded"
             android:autofillHints="value"
@@ -62,8 +59,8 @@
         android:orientation="horizontal"
         android:gravity="center_vertical|center_horizontal"
         android:background="@drawable/rounded_corner"
-        android:padding="5dp"
-        android:layout_marginBottom="20dp">
+        android:padding="2dp"
+        android:layout_marginBottom="10dp">
 
 
         <TextView
@@ -92,7 +89,7 @@
             android:padding="10dp"
             android:hint="@string/enter_the_value_here"
             android:textColor="@color/black"
-            android:textSize="16sp"
+            android:textSize="14sp"
             android:textStyle="normal"
             tools:ignore="LabelFor,RtlHardcoded"
             android:autofillHints="value"
@@ -109,7 +106,7 @@
         android:orientation="horizontal"
         android:gravity="center_vertical|center_horizontal"
         android:background="@drawable/rounded_corner"
-        android:padding="5dp"
+        android:padding="2dp"
         android:layout_marginBottom="20dp">
 
         <TextView
@@ -138,7 +135,7 @@
             android:padding="10dp"
             android:hint="@string/enter_the_value_here"
             android:textColor="@color/black"
-            android:textSize="16sp"
+            android:textSize="14sp"
             android:textStyle="normal"
             tools:ignore="LabelFor,RtlHardcoded"
             android:autofillHints="value"
@@ -148,14 +145,46 @@
 
     </LinearLayout>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginBottom="30dp"
+        android:layout_marginTop="10dp"
+        android:background="#3F51B5"/>
+
     <TextView
         android:id="@+id/formula_tv_ss"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/rounded_corner"
+        android:background="@drawable/rounded_corner_bold"
         android:textAlignment="center"
         android:textStyle="bold"
-        android:textSize="16dp"
+        android:textSize="17sp"
+        android:fontFamily="sans-serif-black"
+        android:layout_marginBottom="20dp"
+        android:padding="10dp"/>
+
+    <TextView
+        android:id="@+id/answer_tv_ss"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_corner_bold"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        android:textSize="17sp"
+        android:fontFamily="sans-serif-black"
+        android:layout_marginBottom="20dp"
+        android:padding="10dp"/>
+
+    <TextView
+        android:id="@+id/explanation_tv_ss"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_corner_bold"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        android:textSize="17sp"
+        android:fontFamily="sans-serif-black"
         android:padding="10dp"/>
 
 </LinearLayout>
