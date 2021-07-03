@@ -1,190 +1,195 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_gravity="center"
-    android:orientation="vertical"
-    android:padding="10dp"
-    tools:context=".ShowSolutionActivity">
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:fillViewport="true">
 
     <LinearLayout
-        android:id="@+id/label_one_linear_layout_ss"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical|center_horizontal"
-        android:background="@drawable/rounded_corner"
-        android:padding="2dp"
-        android:layout_marginBottom="10dp">
+        android:orientation="vertical"
+        android:padding="10dp"
+        tools:context=".ShowSolutionActivity">
+
+        <LinearLayout
+            android:id="@+id/label_one_linear_layout_ss"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical|center_horizontal"
+            android:background="@drawable/rounded_corner"
+            android:padding="2dp"
+            android:layout_marginBottom="10dp">
+
+            <TextView
+                android:id="@+id/label_one_tv_ss"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="right"
+                android:padding="10dp"
+                android:text="@string/label_1"
+                android:textAlignment="viewStart"
+                android:textStyle="bold"
+                tools:ignore="RtlCompat,RtlHardcoded"/>
+
+            <EditText
+                android:id="@+id/label_one_et_ss"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="#FFFFFF"
+                android:fontFamily="sans-serif-light"
+                android:gravity="right"
+                android:padding="10dp"
+                android:hint="@string/enter_the_value_here"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:textStyle="normal"
+                tools:ignore="LabelFor,RtlHardcoded"
+                android:autofillHints="value"
+                android:maxLength="15"
+                android:editable="false"
+                android:inputType="none" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/label_two_linear_layout_ss"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@drawable/rounded_corner"
+            android:padding="2dp"
+            android:layout_marginBottom="10dp">
+
+
+            <TextView
+                android:id="@+id/label_two_tv_ss"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="right"
+                android:padding="10dp"
+                android:text="@string/label_1"
+                android:textAlignment="viewStart"
+                android:textStyle="bold"
+                tools:ignore="RtlCompat,RtlHardcoded">
+
+            </TextView>
+
+            <EditText
+                android:id="@+id/label_two_et_ss"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="#FFFFFF"
+                android:fontFamily="sans-serif-light"
+                android:gravity="right"
+                android:padding="10dp"
+                android:hint="@string/enter_the_value_here"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:textStyle="normal"
+                tools:ignore="LabelFor,RtlHardcoded"
+                android:autofillHints="value"
+                android:maxLength="15"
+                android:editable="false"
+                android:inputType="none" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/label_three_linear_layout_ss"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical|center_horizontal"
+            android:background="@drawable/rounded_corner"
+            android:padding="2dp"
+            android:layout_marginBottom="20dp">
+
+            <TextView
+                android:id="@+id/label_three_tv_ss"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="right"
+                android:padding="10dp"
+                android:text="@string/label_1"
+                android:textAlignment="viewStart"
+                android:textStyle="bold"
+                tools:ignore="RtlCompat,RtlHardcoded">
+
+            </TextView>
+
+            <EditText
+                android:id="@+id/label_three_et_ss"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="#FFFFFF"
+                android:fontFamily="sans-serif-light"
+                android:gravity="right"
+                android:padding="10dp"
+                android:hint="@string/enter_the_value_here"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:textStyle="normal"
+                tools:ignore="LabelFor,RtlHardcoded"
+                android:autofillHints="value"
+                android:maxLength="15"
+                android:editable="false"
+                android:inputType="none" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginBottom="30dp"
+            android:layout_marginTop="10dp"
+            android:background="#3F51B5"/>
 
         <TextView
-            android:id="@+id/label_one_tv_ss"
-            android:layout_width="wrap_content"
+            android:id="@+id/formula_tv_ss"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:fontFamily="sans-serif-medium"
-            android:gravity="right"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/rounded_corner_bold"
+            android:fontFamily="@font/mukta_vaani_medium"
             android:padding="10dp"
-            android:text="@string/label_1"
-            android:textAlignment="viewStart"
-            android:textStyle="bold"
-            tools:ignore="RtlCompat,RtlHardcoded"/>
+            android:textAlignment="center"
+            android:textSize="17sp"
+            android:textStyle="bold" />
 
-        <EditText
-            android:id="@+id/label_one_et_ss"
-            android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/answer_tv_ss"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="#FFFFFF"
-            android:fontFamily="sans-serif-light"
-            android:gravity="right"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/rounded_corner_bold"
+            android:fontFamily="@font/mukta_vaani_medium"
             android:padding="10dp"
-            android:hint="@string/enter_the_value_here"
-            android:textColor="@color/black"
-            android:textSize="14sp"
-            android:textStyle="normal"
-            tools:ignore="LabelFor,RtlHardcoded"
-            android:autofillHints="value"
-            android:maxLength="15"
-            android:editable="false"
-            android:inputType="none" />
+            android:textAlignment="center"
+            android:textSize="17sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/explanation_tv_ss"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_corner_bold"
+            android:fontFamily="@font/mukta_vaani_medium"
+            android:padding="10dp"
+            android:textAlignment="center"
+            android:textSize="17sp"
+            android:textStyle="bold" />
 
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/label_two_linear_layout_ss"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical|center_horizontal"
-        android:background="@drawable/rounded_corner"
-        android:padding="2dp"
-        android:layout_marginBottom="10dp">
-
-
-        <TextView
-            android:id="@+id/label_two_tv_ss"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:fontFamily="sans-serif-medium"
-            android:gravity="right"
-            android:padding="10dp"
-            android:text="@string/label_1"
-            android:textAlignment="viewStart"
-            android:textStyle="bold"
-            tools:ignore="RtlCompat,RtlHardcoded">
-
-        </TextView>
-
-        <EditText
-            android:id="@+id/label_two_et_ss"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="#FFFFFF"
-            android:fontFamily="sans-serif-light"
-            android:gravity="right"
-            android:padding="10dp"
-            android:hint="@string/enter_the_value_here"
-            android:textColor="@color/black"
-            android:textSize="14sp"
-            android:textStyle="normal"
-            tools:ignore="LabelFor,RtlHardcoded"
-            android:autofillHints="value"
-            android:maxLength="15"
-            android:editable="false"
-            android:inputType="none" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/label_three_linear_layout_ss"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical|center_horizontal"
-        android:background="@drawable/rounded_corner"
-        android:padding="2dp"
-        android:layout_marginBottom="20dp">
-
-        <TextView
-            android:id="@+id/label_three_tv_ss"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:fontFamily="sans-serif-medium"
-            android:gravity="right"
-            android:padding="10dp"
-            android:text="@string/label_1"
-            android:textAlignment="viewStart"
-            android:textStyle="bold"
-            tools:ignore="RtlCompat,RtlHardcoded">
-
-        </TextView>
-
-        <EditText
-            android:id="@+id/label_three_et_ss"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="#FFFFFF"
-            android:fontFamily="sans-serif-light"
-            android:gravity="right"
-            android:padding="10dp"
-            android:hint="@string/enter_the_value_here"
-            android:textColor="@color/black"
-            android:textSize="14sp"
-            android:textStyle="normal"
-            tools:ignore="LabelFor,RtlHardcoded"
-            android:autofillHints="value"
-            android:maxLength="15"
-            android:editable="false"
-            android:inputType="none" />
-
-    </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:layout_marginBottom="30dp"
-        android:layout_marginTop="10dp"
-        android:background="#3F51B5"/>
-
-    <TextView
-        android:id="@+id/formula_tv_ss"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/rounded_corner_bold"
-        android:textAlignment="center"
-        android:textStyle="bold"
-        android:textSize="17sp"
-        android:fontFamily="sans-serif-black"
-        android:layout_marginBottom="20dp"
-        android:padding="10dp"/>
-
-    <TextView
-        android:id="@+id/answer_tv_ss"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/rounded_corner_bold"
-        android:textAlignment="center"
-        android:textStyle="bold"
-        android:textSize="17sp"
-        android:fontFamily="sans-serif-black"
-        android:layout_marginBottom="20dp"
-        android:padding="10dp"/>
-
-    <TextView
-        android:id="@+id/explanation_tv_ss"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/rounded_corner_bold"
-        android:textAlignment="center"
-        android:textStyle="bold"
-        android:textSize="17sp"
-        android:fontFamily="sans-serif-black"
-        android:padding="10dp"/>
-
-</LinearLayout>
+</ScrollView>
