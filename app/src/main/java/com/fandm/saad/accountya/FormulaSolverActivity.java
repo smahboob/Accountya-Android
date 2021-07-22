@@ -20,6 +20,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
@@ -73,6 +75,8 @@ public class FormulaSolverActivity extends AppCompatActivity {
 
     private String formula_name_global;
 
+    AdView adView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.d("Tag: ", "Came to teh on create of formula");
@@ -87,9 +91,17 @@ public class FormulaSolverActivity extends AppCompatActivity {
         label_one_et = findViewById(R.id.label_one_et);
         label_two_et = findViewById(R.id.label_two_et);
         label_three_et = findViewById(R.id.label_three_et);
+        adView = findViewById(R.id.adViewFormulaSolver);
+
+        AdRequest adRequest = new AdRequest.Builder().build();
+        adView.loadAd(adRequest);
 
         String formula_type = getIntent().getStringExtra("formula_type");
         String formula_tag = getIntent().getStringExtra("formula_tag");
+        String toast_message = getIntent().getStringExtra("toast_message");
+        if(!toast_message.equals("")){
+            Snackbar.make(findViewById(R.id.formula_solver_layout), toast_message, Snackbar.LENGTH_LONG).show();
+        }
         formula_tag_int = Integer.parseInt(formula_tag);
 
 
@@ -129,8 +141,8 @@ public class FormulaSolverActivity extends AppCompatActivity {
         String label_val_2 = label_two_et.getText().toString();
 
         if(label_val_1.isEmpty() || label_val_2.isEmpty()){
-            Snackbar.make(findViewById(R.id.formula_solver_layout), "Missing information required to calculate.", Snackbar.LENGTH_LONG);
-            Toast.makeText(this, "Missing information to calculate.", Toast.LENGTH_SHORT).show();
+            Snackbar.make(findViewById(R.id.formula_solver_layout), "Missing information! Unable to Calculate", Snackbar.LENGTH_LONG).show();
+//            Toast.makeText(this, "Missing information to calculate.", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -141,8 +153,8 @@ public class FormulaSolverActivity extends AppCompatActivity {
             String label_val_3 = label_three_et.getText().toString();
             current_label_values[2] = label_val_3;
             if(label_val_3.isEmpty()){
-                Snackbar.make(findViewById(R.id.formula_solver_layout), "Missing information required to calculate.", Snackbar.LENGTH_LONG);
-                Toast.makeText(this, "Missing information to calculate.", Toast.LENGTH_SHORT).show();
+                Snackbar.make(findViewById(R.id.formula_solver_layout), "Missing information! Unable to Calculate", Snackbar.LENGTH_LONG).show();
+//                Toast.makeText(this, "Missing information to calculate.", Toast.LENGTH_SHORT).show();
                 return;
             }
         }

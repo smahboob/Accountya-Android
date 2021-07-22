@@ -10,16 +10,22 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Accountya">
 
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-3897852847996080~2858056189"/>
+
         <activity android:name=".ShowSolutionActivity"
             android:parentActivityName=".FormulaSolverActivity" />
         <activity
             android:name=".FormulaSolverActivity"
+            android:hardwareAccelerated="true"
             android:parentActivityName=".BaseFormulaActivity" />
         <activity
             android:name=".BaseFormulaActivity"
             android:parentActivityName=".HomeActivity" />
 
-        <activity android:name=".HomeActivity">
+        <activity android:name=".HomeActivity"
+            android:hardwareAccelerated="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

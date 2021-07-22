@@ -10,6 +10,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import java.lang.Math;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -96,6 +98,9 @@ public class ShowSolutionActivity extends AppCompatActivity {
             //cost accounting formula
             case "Breakeven": {
                 formula = "Formula: [(Fixed Cost / Sales Price Per Unit) - Variable Cost Per Unit]";
+                if(val3 <= 0){
+                    returnToPreviousActivity();
+                }
                 answer = (val1 / val2) - val3;
                 formula_explanation = "The break-even point (BEP) is the point at which total cost and total revenue are equal, i.e. 'even'. There is no net loss or gain, and one has 'broken even', though opportunity costs have been paid and capital has received the risk-adjusted, expected return. In short, all costs that must be paid are paid, and there is neither profit nor loss.";
                 break;
@@ -103,6 +108,9 @@ public class ShowSolutionActivity extends AppCompatActivity {
             case "Gross Margin": {
                 formula = "Formula: [(Total Revenue - Cost of goods sold) / Total Revenue]";
                 answer = (val1 - val2) / val1;
+                if(val1 <= 0){
+                    returnToPreviousActivity();
+                }
                 formula_explanation = "Gross margin is the sales revenue a company retains after incurring the direct costs associated with producing the goods it sells, and the services it provides. The higher the gross margin, the more capital a company retains on each dollar of sales, which it can then use to pay other costs or satisfy debt obligations. ";
                 break;
             }
@@ -115,12 +123,18 @@ public class ShowSolutionActivity extends AppCompatActivity {
             case "Contribution Margin": {
                 formula = "Formula: [(Total Revenue - Variable Cost) / Units Sold]";
                 answer = (val1 - val2) / val3;
+                if(val3 <= 0){
+                    returnToPreviousActivity();
+                }
                 formula_explanation = "Contribution margin per unit is the dollar amount of a product’s selling price exceeds its variable costs. In other words, it’s the amount of revenues from the sale of one unit that is left over after the variable costs for that unit have been paid. You can think it as the amount of money that each unit brings in to pay for fixed costs.";
                 break;
             }
             case "Profit Margin": {
                 formula = "Formula: [(Total Revenue - Total Expenses) / Total Revenue]";
                 answer = (val1 - val2) / val1;
+                if(val1 <= 0){
+                    returnToPreviousActivity();
+                }
                 formula_explanation = "Profit margin is one of the commonly used profitability ratios to gauge the degree to which a company or a business activity makes money. It represents what percentage of sales has turned into profits. Simply put, the percentage figure indicates how many cents of profit the business has generated for each dollar of sale.";
                 break;
             }
@@ -133,6 +147,9 @@ public class ShowSolutionActivity extends AppCompatActivity {
             case "Efficiency Variance": {
                 formula = "Formula: [(Actual Cost incurred - Standard Cost) * Standard Cost]";
                 answer = (val1 - val2) / val3;
+                if(val3 <= 0){
+                    returnToPreviousActivity();
+                }
                 formula_explanation = "Efficiency variance is the difference between the theoretical amount of inputs required to produce a unit of output and the actual number of inputs used to produce the unit of output. In manufacturing, efficiency variance can be used to analyze the effectiveness of an operation.";
                 break;
             }
@@ -159,31 +176,45 @@ public class ShowSolutionActivity extends AppCompatActivity {
             case "Return on Asset": {
                 formula = "Formula: [Net Income / Average Total Assets]";
                 answer = (val1 / val2);
+                if(val2 <= 0){
+                    returnToPreviousActivity();
+                }
                 formula_explanation = "Return on assets (ROA) is an indicator of how profitable a company is relative to its total assets. ROA gives a manager, investor, or analyst an idea as to how efficient a company's management is at using its assets to generate earnings. Return on assets is displayed as a percentage. ROA is best used when comparing a company to its previous performance.";
                 break;
             }
             case "Return on Equity": {
                 formula = "Formula: [Net Income / Shareholder Equity]";
                 answer = (val1 / val2);
+                if(val2 <= 0){
+                    returnToPreviousActivity();
+                }
                 formula_explanation = "Return on equity (ROE) is a measure of financial performance calculated by dividing net income by shareholders' equity. Because shareholders' equity is equal to a company’s assets minus its debt, ROE is considered the return on net assets. ROE is considered a measure of how effectively management is using a company’s assets to create profits.";
                 break;
             }
             case "Debt to Asset": {
                 formula = "Formula: [(Short Term Debt + Long Term Debt) / Total Assets]";
                 answer = (val1 + val2) / val3;
-                Log.d("TAG answer ", String.valueOf(answer));
+                if(val3 <= 0){
+                    returnToPreviousActivity();
+                }
                 formula_explanation = "Total-debt-to-total-assets is a leverage ratio that defines the total amount of debt relative to assets owned by a company. Using this metric, analysts can compare one company's leverage with that of other companies in the same industry. This information can reflect how financially stable a company is.";
                 break;
             }
             case "Straight-line depreciation": {
                 formula = "Formula: [(Initial Cost - Salvage Value) / Useful Life]";
                 answer = (val1 - val2) / val3;
+                if(val3 <= 0){
+                    returnToPreviousActivity();
+                }
                 formula_explanation = "Straight line depreciation is a common method of depreciation where the value of a fixed asset is reduced gradually over its useful life.The default method used to gradually reduce the carrying amount of a fixed asset over its useful life is called Straight Line Depreciation.";
                 break;
             }
             case "Double Declining Balance": {
                 formula = "Formula: [Final book value * (Depreciation Rate / 100)]";
                 List<Double> depreciation_list = new ArrayList<>();
+                if(val3 <= 0){
+                    returnToPreviousActivity();
+                }
 
                 double depreciationRate = 2 * ((1/val3) * 100);
                 double netBookValue = val1;
@@ -203,25 +234,33 @@ public class ShowSolutionActivity extends AppCompatActivity {
                 answer = finalDepreciation;
 
                 String yearly_data = "The yearly deprecations are: \n" + Arrays.toString(depreciation_list.toArray());
-                Log.d("TAG: ", yearly_data);
                 formula_explanation = yearly_data + "\n------\nDouble declining balance method is a form of an accelerated depreciation method in which the asset value is depreciated at twice the rate it is done in the straight-line method.The asset will depreciate by the same amount however it will be expensed higher in early years of its useful life";
                 break;
             }
             case "Asset Turnover Ratio": {
                 formula = "Formula: [Net Sales / Average Total Assets]";
                 answer = (val1 / val2);
+                if(val2 <= 0){
+                    returnToPreviousActivity();
+                }
                 formula_explanation = "This ratio measures the value of a company's revenues relative to the value of its assets. The asset turnover ratio can be used as an indicator of the efficiency with which a company is using its assets to generate revenue.The higher the ratio, the more efficient a company is at generating revenue from its assets.";
                 break;
             }
             case "Debt service coverage ratio": {
                 formula = "Formula: [Net Operating Income / Total Debt Services]";
                 answer = (val1 / val2);
+                if(val2 <= 0){
+                    returnToPreviousActivity();
+                }
                 formula_explanation = "In corporate finance, the debt-service coverage ratio (DSCR) is a measurement of the cash flow available to pay current debt obligations. The ratio states net operating income as a multiple of debt obligations due within one year, including interest, principal, sinking-fund and lease payments.";
                 break;
             }
             case "Acid Test Ratio": {
                 formula = "Formula: [(Current Assets - Ending Inventory) / Current Liabilities]";
                 answer = (val1 - val3) / val2;
+                if(val2 <= 0){
+                    returnToPreviousActivity();
+                }
                 formula_explanation = "The acid-test ratio uses a firm's balance sheet data as an indicator of whether it has sufficient short-term assets to cover its short-term liabilities. This metric is more useful in certain situations than the current ratio, since it ignores assets such as inventory, which may be difficult to quickly liquidate.";
                 break;
             }
@@ -235,6 +274,15 @@ public class ShowSolutionActivity extends AppCompatActivity {
         explanation_text.setText(formula_explanation);
     }
 
+    private void returnToPreviousActivity() {
+        Intent newIntent = new Intent(ShowSolutionActivity.this, FormulaSolverActivity.class);
+        newIntent.putExtra("formula_type", getIntent().getStringExtra("formula_type"));
+        newIntent.putExtra("formula_tag", getIntent().getStringExtra("formula_tag"));
+        newIntent.putExtra("toast_message", "Invalid Values! Unable to compute the answer!");
+        startActivity(newIntent);
+        finish();
+    }
+
     //we override this method to send data back to the previous activity.
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -243,6 +291,7 @@ public class ShowSolutionActivity extends AppCompatActivity {
             Intent newIntent = new Intent(ShowSolutionActivity.this, FormulaSolverActivity.class);
             newIntent.putExtra("formula_type", getIntent().getStringExtra("formula_type"));
             newIntent.putExtra("formula_tag", getIntent().getStringExtra("formula_tag"));
+            newIntent.putExtra("toast_message", "");
             startActivity(newIntent);
             return true;
         }

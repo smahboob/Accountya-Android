@@ -66,6 +66,7 @@ public class BaseFormulaActivity extends AppCompatActivity {
         Intent open_formula_solver = new Intent(BaseFormulaActivity.this, FormulaSolverActivity.class);
         open_formula_solver.putExtra("formula_tag", String.valueOf(view.getTag()));
         open_formula_solver.putExtra("formula_type", formula_type);
+        open_formula_solver.putExtra("toast_message", "");
         startActivity(open_formula_solver);
     }
 }

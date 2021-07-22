@@ -3,8 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/layout/activity_show_solution.xml" value="0.31842105263157894" />
         <entry key="app/src/main/res/layout/base_accounting_activity.xml" value="0.31842105263157894" />
-        <entry key="app/src/main/res/layout/formula_solver_activity.xml" value="0.31842105263157894" />
+        <entry key="app/src/main/res/layout/formula_solver_activity.xml" value="0.1" />
         <entry key="app/src/main/res/layout/home_activity.xml" value="0.33" />
       </map>
     </option>
